@@ -6,7 +6,7 @@
             </span><!--'to' attribute attaches a path to a link in the page-->
             
             <span class="nav-link">
-                <router-link v-bind:to="{name: 'AboutSite'}">About this site</router-link>
+                <router-link v-bind:to="{name: 'AboutSite'}">About this site</router-link><!--navigations links can be added anywhere-->
             </span>
             
             <label>Header image by 
