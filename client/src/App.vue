@@ -10,8 +10,8 @@
 
 <script>
 
-import PageHeader from '@/components/PageHeader.vue'//pull in PageHeader components
-import PageFooter from './components/PageFooter.vue'//pull in PageFooter components
+import PageHeader from '@/components/PageHeader.vue'//pull in components
+import PageFooter from './components/PageFooter.vue'
 import StateList from './components/StateList.vue'
 
 export default {
