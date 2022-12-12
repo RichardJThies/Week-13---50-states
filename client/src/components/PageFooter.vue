@@ -6,12 +6,14 @@
             </span><!--'to' attribute attaches a path to a link in the page-->
             
             <span class="nav-link">
-                <router-link v-bind:to="{name: 'AboutSite'}">About this site</router-link><!--navigations links can be added anywhere-->
+                <router-link v-bind:to="{name: 'AboutSite'}">About this site</router-link><!--router-link navigations links can be added anywhere-->
             </span>
             
             <label>Header image by 
                 <a href="https://unsplash.com/photos/KpBXAOs80YI">@chrislawton on Unsplash</a>
             </label>
+
+            <label><a target="_blank" href="https://icons8.com/icon/43632/map">Map</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a></label><!--credit for free icon-->
         </div>
     </div>
 </template>

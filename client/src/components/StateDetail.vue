@@ -6,6 +6,14 @@
         <div>
             <input class="visit-state" type="checkbox" v-model="visited" v-on:change="visitedChanged"><!--v-model connects to the visited data, v-on calls method to react when button is checkbox interacted with-->
         </div>
+
+        <div>
+            <!--This router link navigates to /map/"whatever state"/-->
+            <router-link v-bind:to="{name: 'StateMap', params: {state: state.name}}">
+                <img class="map-icon" src="@/assets/map_icon.png">
+            </router-link><!--'v-bind:to' dynamically links based on state being called. "name: 'StateMap'" is the path being pulled from index.js, uses params to generate the correct URL, as-->
+                                                                                                                                                            <!--state.name is the state prop below-->
+        </div>
     </div>
     
 </template>
@@ -43,6 +51,11 @@
 .visit-state {
     margin: 1rem;
     text-align: center;/*keep this style so this component has control rather that app.vue centering*/
+}
+
+.map-icon {
+    width: 2rem;
+    height: 2rem;
 }
 </style>
 
