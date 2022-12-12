@@ -1,5 +1,9 @@
 let express = require('express')
 let states_api = require('./routes/states')//pull in states.js file
+let path = require('path')//import path library
+
+let vueAppPath = path.join(__dirname, 'client', 'dist')//joining location of code (__dirname), + client directory name (client), + distdirectory name (dist) to make path to code of vue app
+app.use(express.static(vueAppPath))//requests to app without specifying any particular path will be served files in dist directory. This makes the app is made available
 
 let app = express()//create web server app
 
