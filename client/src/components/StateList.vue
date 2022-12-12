@@ -52,21 +52,3 @@ export default {
     margin: 1rem
 }
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -11,5 +11,11 @@ export default {//exporting methods that will be used by the rest of the app
         return axios.patch('/api/States/' + stateName, requestData).then(response => {//request to api for something like '/api/States/Iowa'
             return response.data//'.data' received is the 'ok' string from state.js, which is status code 200 (success)
         })
+    },
+
+    getOneState(stateName){
+        return axios.get('/api/state/' + stateName).then( response => {//plain get request, no data will be sent back
+            return response.data
+        })
     }
 }

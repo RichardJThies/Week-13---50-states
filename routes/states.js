@@ -11,6 +11,20 @@ router.get('/states', function(req, res, next){//creates 1st route. '/states' cr
     .catch(err => next(err))//any errors are passed to error handler
 })
 
+//fetches information of specific state
+router.get('/state/:name', function(req, res, name) {//'/state' singular, NOT '/states'.
+    let stateName = req.params.name
+    States.findOne({where: {name: stateName}})
+        .then(state => {
+            if(state) {
+                return res.json(state)//convert state data from db into JSON format, then returns that to the cloent
+            } else {
+                return res.status(404).send('State not found')
+            }
+        })
+        .catch(err => next(err))
+    })
+
 // patch route to update a state
 router.patch('/states/:name', function(req, res, next){//:name will match any state to states
     let stateName = req.params.name//finds which state to be modified. "req.params" will find any parts of the URL being updated with "/:name", ".name" must be there to match with "/:name".

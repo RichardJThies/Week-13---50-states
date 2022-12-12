@@ -5,6 +5,8 @@ import StateAPIService from '@/services/stateService'//makesStateService availab
 
 import router from '@/router'//imports index.js file from the router directory
 
+import 'leaflet/dist/leaflet.css'//leaflet stylesheets will be loaded by the time a map is clicked on
+
 let app = createApp(App)
 
 app.config.globalProperties.$stateService = StateAPIService//"$stateService" is creating a new global property
