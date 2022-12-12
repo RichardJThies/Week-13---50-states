@@ -7,8 +7,8 @@
         <label v-else>You have not visited this state yet</label>
 
         <!--map here-->
-        <div id="map-container">
-            <l-map v-bind:center="mapCenter" v-bind:zoom="state.zoom"><!--uses state data to set map center and zoom level-->
+        <div id="map-container" v-if="dataReady"><!--mapCenter() computed property is trying to activate before API call. 'v-if' ensures API call return takes precedence-->
+            <l-map ref="map" v-on:ready="onMapReady" v-bind:center="mapCenter" v-bind:zoom="state.zoom"><!--uses state data to set map center and zoom level-->
                 <l-tile-layer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; OpenStreetMap contributors">
@@ -28,7 +28,9 @@
         },
         data() {
             return {   
-                state: {}
+                state: {},
+                dataReady: false,//tracks if the data is ready for display after API call completes
+                mapReady: false//tracks if the leaflet map is ready for display after loading
             }
         },
         mounted() {//lifecycle hook
@@ -39,7 +41,32 @@
             fetchStateData() {
                 this.$stateService.getOneState(this.state.name).then(state => {
                     this.state = state//overwrites the state data in data() with response from API
+                    this.dataReady = true//API call is completed, set data as ready for map
+                }).catch(err => {//catch if user manually changes the state name in the URL
+                    //accounting for '404 not found'
+                    if(err.response && err.response.status === 404) {
+                        this.state.name = '?'// TODO find better way to tell user
+                    } else {
+                    //'500 server' error called
+                        alert('Sorry, error fetching data about this state')
+                        console.error(err)//users will see alert, developer will see console error
+                    }
+                    
                 })
+            },
+            onMapReady() {
+                this.mapReady = true//listens for l-map component to send'v-on:ready' event. If sent, set to true
+            },
+            setMapView() {
+                if(this.mapReady && this.dataReady) {
+                    //TODO make map show correct place and zoom
+                    this.$refs.map.leafletObject.setView(this.mapCenter, this. zoom)//when refering to mapCenter, you refer to it as a property, dropping the ()
+                }
+            }
+        },
+        computed: {
+            mapCenter() {
+                return [this.state.lat, this.state.lon]
             }
         }
     }
