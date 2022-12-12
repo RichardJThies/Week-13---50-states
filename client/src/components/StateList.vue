@@ -31,10 +31,18 @@ export default {
                 this.$stateService.getAllStates().then(states => {
                     this.states = states//sets the data (states array) equal to the JSON that's returned from te request to get all states
                 })
+                .catch(err => {
+                    alert('Sorry, can\'t fetch state list')
+                    console.error(err)//user can't do anything for errors in db or server. Just send msg and log for developer
+                })
             },
             updateVisited(stateName, visited) {//method receives name of the state, and true/false status from StateDetail event
                 this.$stateService.setVisited(stateName, visited).then(() => {//API call to setVisited function in stateService.js. Receives 'ok'/200 code back, not new data
                     this.fetchAllStates()//if 'ok', updates data with new true/false value
+                })
+                .catch(err => {
+                    alert('Sorry, can\'t update state')
+                    console.error(err)//user can't do anything for errors in db or server. Just send msg and log for developer
                 })
             }
         }
