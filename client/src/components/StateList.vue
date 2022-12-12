@@ -1,8 +1,10 @@
 <!--this component is in charge of getting the other components-->
 <template>
     <div class="state-list-container">
-        <div class="state-container" v-for="state in states" v-bind:key="state.name"><!--"v-bind:key" removes warning/error. It assigns a unique value for each individual object in the v-for label. Makes it much more efficent-->
-            <state-detail v-bind:state="state"></state-detail><!--v-bind state prop to the state objects in array--><!--to reorder objects while loaded in the browser?-->
+        <div class="state-container" v-for="state in states" v-bind:key="state.name"><!--"v-bind:key" removes warning/error. It assigns a unique value for each individual object in the v-for label. Makes it much -->
+            <state-detail 
+            v-bind:state="state"
+            v-on:update-visited="updateVisited"></state-detail><!--v-bind state prop to the state objects in array-->        <!--^^more efficent to reorder objects while loaded in the browser?^^-->
         </div>
     </div>
 </template>
@@ -28,6 +30,11 @@ export default {
             fetchAllStates() {
                 this.$stateService.getAllStates().then(states => {
                     this.states = states//sets the data (states array) equal to the JSON that's returned from te request to get all states
+                })
+            },
+            updateVisited(stateName, visited) {//method receives name of the state, and true/false status from StateDetail event
+                this.$stateService.setVisited(stateName, visited).then(() => {//API call to setVisited function in stateService.js. Receives 'ok'/200 code back, not new data
+                    this.fetchAllStates()//if 'ok', updates data with new true/false value
                 })
             }
         }

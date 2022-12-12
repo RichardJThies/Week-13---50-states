@@ -20,7 +20,7 @@ router.patch('/states/:name', function(req, res, next){//:name will match any st
         .then(rowsUpdated => {//rowsUpdated is an array of information that sequelize sends back about what was updated in db                         //visited value to whatever stateVisited is (true or false)
             let numberOfRowsUpdated = rowsUpdated[0]//
             if(numberOfRowsUpdated == 1) {//if number of rows is 1, state being updated has been fouund and updated
-                return res.send('ok')//confirms state IS in db, no data needs to be returned
+                return res.send('ok')//confirms state IS in db, no data needs to be returned. Returns status code 200
             }
             return res.status(404).send('State not found')//if no state found, 404 errot msg
         })   

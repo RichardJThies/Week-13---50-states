@@ -4,7 +4,7 @@
         <span class="state-name">{{state.name}}</span>
         
         <div>
-            <input class="visit-state" type="checkbox">
+            <input class="visit-state" type="checkbox" v-model="visited" v-on:change="visitedChanged"><!--v-model connects to the visited data, v-on calls method to react when button is checkbox interacted with-->
         </div>
     </div>
     
@@ -13,8 +13,19 @@
 <script>
     export default {
         name: 'StateDetail',
+        emits: ['update-visited'],
         props: {
             state: Object
+        },
+        data() {//connects checkbox in template
+            return {
+                visited: this.state.visited//'.visited' is taken from the state object
+            }
+        },
+        methods: {
+            visitedChanged() {
+                this.$emit('update-visited', this.state.name, this.visited)//send event to parent compoenent (StateList) 
+            }
         }
     }
 </script>
