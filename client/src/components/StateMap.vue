@@ -45,7 +45,7 @@
                 }).catch(err => {//catch if user manually changes the state name in the URL
                     //accounting for '404 not found'
                     if(err.response && err.response.status === 404) {
-                        this.$router.push({name: 'NotFound'})//sends user to NotFound page in case of 404
+                        this.state.name = '?'// TODO find better way to tell user
                     } else {
                     //'500 server' error called
                         alert('Sorry, error fetching data about this state')
