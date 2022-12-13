@@ -15,7 +15,7 @@ module.exports = {//changed from .json to .js file because json is static, there
   "production": {
     "username": "Richard",
     "password": process.env.DB_PASSWORD,
-    "database": "fifty-states-visited-database-server",
+    "database": "fifity-states-visited-database",
     "host": "fifty-states-visited-database-server-rt.database.windows.net",
     "dialect": "mssql"
   }
